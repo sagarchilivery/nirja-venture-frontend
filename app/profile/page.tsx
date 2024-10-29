@@ -6,11 +6,16 @@ import React, { use, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ConvertDate, ConvertTime } from "../page";
 import { useRouter } from "next/navigation";
+import MyModal from "@/components/modal";
 
 export default function Profile() {
   const { state } = useContext(Context);
   const { user } = state;
   const [userId, setUserId] = useState("");
+  const [modalData, setModalData] = useState({
+    flag: false,
+    article: {},
+  });
 
   const router = useRouter();
 
@@ -48,7 +53,7 @@ export default function Profile() {
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [modalData]);
 
   useEffect(() => {
     if (user) {
@@ -111,7 +116,12 @@ export default function Profile() {
                     {ConvertTime(article.createdAt)}
                   </div>
                   <div className="mt-5 flex gap-5">
-                    <button className=" border rounded-md px-4 py-1.5 bg-slate-600 hover:bg-sky-950">
+                    <button
+                      onClick={() => {
+                        setModalData({ flag: true, article: article });
+                      }}
+                      className=" border rounded-md px-4 py-1.5 bg-slate-600 hover:bg-sky-950"
+                    >
                       Update
                     </button>
                     <button
@@ -126,6 +136,10 @@ export default function Profile() {
             </div>
           )}
         </>
+
+        {modalData.flag && (
+          <MyModal modalData={modalData} setModalData={setModalData} />
+        )}
       </>
     </Base>
   );
