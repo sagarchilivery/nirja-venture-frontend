@@ -90,7 +90,7 @@ export default function Profile() {
           <div>
             {user && userId !== "" && userData && (
               <div className=" flex flex-col items-center justify-center my-10 rounded-md">
-                <div className="">name - {userData.username}</div>
+                <div className="">Username - {userData.username}</div>
                 <div className="">email - {userData.email}</div>
                 <div className="">Credits - {userData.credits}</div>
                 <div className="">Total articles - {articles.length}</div>

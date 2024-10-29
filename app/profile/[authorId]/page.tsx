@@ -50,25 +50,28 @@ export default function UsernameProfile() {
 
   return (
     <Base>
-      <div className=" flex flex-col min-h-screen pb-24">
+      <div className=" flex flex-col min-h-screen">
         {author && (
-          <div className="bg-red-900">
-            <div className="bg-red-500 p-5 m-5 rounded-md">
-              <h1>User name - {author.username}</h1>
-              <p>email - {author.email}</p>
-              <span>Total articles - {articles.length}</span>
-            </div>
+          <div className=" flex flex-col items-center justify-center my-10 rounded-md">
+            <div className="">Username - {author.username}</div>
+            <div className="">email - {author.email}</div>
+            <span>Total articles - {articles.length}</span>
           </div>
         )}
 
-        <div className="bg-red-900 w-screen min-h-screen">
+        <div className="bg-sky-900 w-screen min-h-screen py-5">
           {articles.map((article, index) => (
-            <div key={index} className="bg-red-500 p-5 m-5 rounded-md">
-              <h1>{article.title}</h1>
-              <p>{article.content}</p>
-              <span>Author - {article.author.username}</span>{" "}
-              <span>Created At - </span>
-              {ConvertDate(article.createdAt)} {ConvertTime(article.createdAt)}
+            <div
+              key={index}
+              className="bg-sky-700 p-5 m-5 max-w-[550px] mx-auto shadow-2xl rounded-md"
+            >
+              <h2>Title - {article.title}</h2>
+              <div>Content - {article.content}</div>
+              <div>Author - {article.author.username}</div>
+              <div>
+                Created At - {ConvertDate(article.createdAt)}{" "}
+                {ConvertTime(article.createdAt)}
+              </div>
             </div>
           ))}
         </div>
