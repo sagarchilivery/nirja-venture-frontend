@@ -31,6 +31,21 @@ export default function Profile() {
     }
   };
 
+  const [userData, setUserData] = useState<any>();
+
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get("http://localhost:1337/auth/" + user.id);
+      if (res.data.success) {
+        setUserData(res.data.data);
+      }
+    } catch (error) {
+      router.push("/");
+      console.log("error: ", error);
+      toast.error("Something went wrong");
+    }
+  };
+
   useEffect(() => {
     fetchArticles();
   }, []);
@@ -38,6 +53,7 @@ export default function Profile() {
   useEffect(() => {
     if (user) {
       setUserId(user.id);
+      fetchUserData();
     } else {
       setUserId("");
       router.push("/");
@@ -64,31 +80,53 @@ export default function Profile() {
 
   return (
     <Base>
-      <div>
-        {user && userId !== "" && (
-          <div className="">
-            <div className="">name - {user.username}</div>
-            <div className="">email - {user.email}</div>
-            <div className="">Credits - {user.credits}</div>
-            <div className="">total articles - {articles.length}</div>
+      <>
+        <>
+          <div>
+            {user && userId !== "" && userData && (
+              <div className=" flex flex-col items-center justify-center my-10 rounded-md">
+                <div className="">name - {userData.username}</div>
+                <div className="">email - {userData.email}</div>
+                <div className="">Credits - {userData.credits}</div>
+                <div className="">Total articles - {articles.length}</div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className="bg-red-900 w-screen min-h-screen">
-        {articles.map((article, index) => (
-          <div key={index} className="bg-red-500 p-5 m-5 rounded-md">
-            <h1>{article.title}</h1>
-            <p>{article.content}</p>
-            <span>Author - {article.author.username}</span>
-            <span>Created At - </span>
-            {ConvertDate(article.createdAt)} {ConvertTime(article.createdAt)}
-            <div className="px-5 flex gap-5">
-              <button>Update</button>
-              <button onClick={() => handleDelete(article._id)}>Delete</button>
+          {articles.length == 0 ? (
+            <div className=" flex items-center justify-center mt-10">
+              No articles found
             </div>
-          </div>
-        ))}
-      </div>
+          ) : (
+            <div className="bg-sky-900 w-screen min-h-screen py-5">
+              {articles.map((article, index) => (
+                <div
+                  key={index}
+                  className="bg-sky-700 p-5 m-5 max-w-[550px] mx-auto shadow-2xl rounded-md"
+                >
+                  <h2>Title - {article.title}</h2>
+                  <div>Content - {article.content}</div>
+                  <div>Author - {article.author.username}</div>
+                  <div>
+                    Created At - {ConvertDate(article.createdAt)}{" "}
+                    {ConvertTime(article.createdAt)}
+                  </div>
+                  <div className="mt-5 flex gap-5">
+                    <button className=" border rounded-md px-4 py-1.5 bg-slate-600 hover:bg-sky-950">
+                      Update
+                    </button>
+                    <button
+                      className=" border rounded-md px-4 py-1.5 bg-slate-600 hover:bg-sky-950"
+                      onClick={() => handleDelete(article._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      </>
     </Base>
   );
 }

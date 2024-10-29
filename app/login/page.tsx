@@ -35,9 +35,9 @@ export default function Login() {
       } else {
         toast.error(res.data.message);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
-      toast.error("Something went wrong");
+      toast.error(err.response.data.message);
     }
   };
   return (

@@ -50,24 +50,38 @@ export default function Home() {
 
   return (
     <Base>
-      <div className="bg-red-900 w-screen min-h-screen">
-        {articles.map((article, index) => (
-          <div key={index} className="bg-red-500 p-5 m-5 rounded-md">
-            <h1>{article.title}</h1> <p>{article.content}</p>
-            <span
-              onClick={() => {
-                router.push(`/profile/${article.author._id}`);
-                console.log("article.author: ", article);
-              }}
-              className="cursor-pointer"
+      <></>
+      {articles.length == 0 ? (
+        <div className=" flex items-center justify-center mt-10">
+          No articles found
+        </div>
+      ) : (
+        <div className="bg-sky-900 w-screen min-h-screen py-5">
+          {articles.map((article, index) => (
+            <div
+              key={index}
+              className="bg-sky-700 p-5 m-5 rounded-md max-w-[550px] mx-auto shadow-2xl"
             >
-              Author - {article.author.username}
-            </span>{" "}
-            <span>Created At - </span>
-            {ConvertDate(article.createdAt)} {ConvertTime(article.createdAt)}
-          </div>
-        ))}
-      </div>
+              <h2>Title - {article.title}</h2>
+              <div>Content - {article.content}</div>
+              <div
+                onClick={() => {
+                  router.push(`/profile/${article.author._id}`);
+                  console.log("article.author: ", article);
+                }}
+                className="cursor-pointer"
+              >
+                Author -{" "}
+                <span className="text-lime-400 font-semibold">
+                  {article.author.username}
+                </span>
+              </div>{" "}
+              <span>Created At - </span>
+              {ConvertDate(article.createdAt)} {ConvertTime(article.createdAt)}
+            </div>
+          ))}
+        </div>
+      )}
     </Base>
   );
 }

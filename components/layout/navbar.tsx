@@ -37,7 +37,7 @@ export default function Navbar() {
   }, [user]);
 
   return (
-    <div className=" flex max-w-[1440px] w-full border h-10 mx-auto items-center justify-between">
+    <div className=" flex max-w-[1440px] w-full h-10 mx-auto items-center justify-between">
       <div className=" flex gap-4">
         <Link href="/">Home</Link>
       </div>
