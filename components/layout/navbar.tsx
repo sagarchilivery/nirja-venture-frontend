@@ -51,9 +51,9 @@ export default function Navbar() {
           <>
             <Link href="/post-article">Post Article</Link>
             <Link href="/profile">Profile</Link>
-            <Link onClick={handleLogout} href="/">
+            <div onClick={handleLogout} className=" cursor-pointer">
               Logout
-            </Link>
+            </div>
           </>
         )}
       </div>

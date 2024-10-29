@@ -40,6 +40,7 @@ export default function Profile() {
       setUserId(user.id);
     } else {
       setUserId("");
+      router.push("/");
     }
   }, [user]);
 
@@ -64,7 +65,7 @@ export default function Profile() {
   return (
     <Base>
       <div>
-        {userId !== "" && (
+        {user && userId !== "" && (
           <div className="">
             <div className="">name - {user.username}</div>
             <div className="">email - {user.email}</div>
