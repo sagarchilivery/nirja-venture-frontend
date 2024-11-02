@@ -66,7 +66,7 @@ export default function PostArticle() {
     <Base>
       {user && userId !== "" && userData && (
         <div className=" flex flex-col items-center justify-center mt-12 rounded-md">
-          <div className="">Name - {userData.username}</div>
+          <div className="">Username - {userData.username}</div>
           <div className="">Email - {userData.email}</div>
           <div className="">Credits Left - {userData.credits}</div>
         </div>
