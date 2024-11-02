@@ -66,7 +66,6 @@ export default function Profile() {
   }, [user]);
 
   async function handleDelete(id: any) {
-    console.log("id: ", id);
     try {
       const res = await axios.delete("http://localhost:1337/articles/" + id, {
         withCredentials: true,

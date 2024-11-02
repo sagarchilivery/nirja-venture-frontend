@@ -31,7 +31,6 @@ export default function Home() {
   const { state } = useContext(Context);
   const { user } = state;
   const router = useRouter();
-  console.log("user: ", user);
 
   const [articles, setArticles] = useState<any[]>([]);
 
@@ -67,7 +66,6 @@ export default function Home() {
               <div
                 onClick={() => {
                   router.push(`/profile/${article.author._id}`);
-                  console.log("article.author: ", article);
                 }}
                 className="cursor-pointer"
               >

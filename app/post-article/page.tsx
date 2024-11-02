@@ -31,7 +31,6 @@ export default function PostArticle() {
         setArticle({ title: "", content: "" });
         router.push("/profile");
       } else {
-        console.log("res.data: ", res.data);
         toast.error(res.data.message);
       }
     } catch (error: any) {
